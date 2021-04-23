@@ -355,6 +355,13 @@ function keyReleased()
     
 }
 
+
+function StopExec()
+{ 
+    Error.apply(this, arguments);
+    this.name = "StopExec"; 
+}
+
 /* Display Game Over Function (Another way to write functions [lambda expression]) */
 const displayGameOver = () =>
 {
@@ -364,5 +371,11 @@ const displayGameOver = () =>
     textFont('Georgia');
     fill(255, 0, 0);
     text("Game Over", windowWidth / 2, windowHeight / 2);
+
+    // create new exception type
+    StopExec.prototype = Object.create(Error.prototype);
+
+    // throw error
+    throw new StopExec("Game Ended!");
 
 }
